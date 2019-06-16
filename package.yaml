@@ -1,0 +1,47 @@
+name:                scytale
+version:             0.1.0.0
+github:              "NmVAson/scytale"
+license:             MIT
+author:              "Giuliana Taylor"
+maintainer:          "giuliana@nmvason.com"
+copyright:           "2019 Giuliana Taylor"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            A virtual scytale cipher
+# category:            Web
+
+description:         Please see the README on GitHub at <https://github.com/NmVAson/scytale#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  scytale-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - scytale
+
+tests:
+  scytale-test:
+    main:                EncoderSpec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - scytale
+    - hspec
+    - QuickCheck

@@ -5,6 +5,15 @@ import Numeric.Tools.Integration
 encode :: Int -> Int
 encode x = x
 
+decode :: String -> Double -> String
+decode message radius = 
+    let distance = getHelicalLengthOfLetters radius
+
+    in dropEvery message distance
+
+dropEvery :: [a] -> Int -> [a]
+dropEvery xs n = [ i | (i,c) <- ( zip xs [0..]), (mod c n) == 0]
+
 getCircumference :: Double -> Double
 getCircumference diameter = pi * diameter
 
@@ -23,3 +32,10 @@ getHelicalLength radius height =
         length = sqrt(height^2 + circumference^2)
     
     in round length
+
+
+getHelicalLengthOfLetters :: Double -> Int
+getHelicalLengthOfLetters radius = 
+    let distanceBetweenFirstLetterAndNextMatchingLetter = 1
+    
+    in getHelicalLength radius distanceBetweenFirstLetterAndNextMatchingLetter

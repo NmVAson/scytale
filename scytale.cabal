@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3ec06980acacbbc0b6f65766d6fe2643219b801c4dd849b2d3038359aeda2350
+-- hash: 39a038ed9d631e779e94168114afbb7797e4fe41e016da59ce80411c0758e242
 
 name:           scytale
 version:        0.1.0.0
@@ -35,6 +35,7 @@ library
   build-depends:
       base >=4.7 && <5
     , numeric-tools
+    , random-strings
   default-language: Haskell2010
 
 executable scytale-exe
@@ -47,12 +48,13 @@ executable scytale-exe
   build-depends:
       base >=4.7 && <5
     , numeric-tools
+    , random-strings
     , scytale
   default-language: Haskell2010
 
 test-suite scytale-test
   type: exitcode-stdio-1.0
-  main-is: EncoderSpec.hs
+  main-is: Spec.hs
   other-modules:
       Paths_scytale
   hs-source-dirs:
@@ -63,5 +65,6 @@ test-suite scytale-test
     , base >=4.7 && <5
     , hspec
     , numeric-tools
+    , random-strings
     , scytale
   default-language: Haskell2010

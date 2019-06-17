@@ -39,14 +39,33 @@ main = hspec $ do
             
             dropEvery testMessage n `shouldBe` expected
 
-
         it "should return aligned letters" $ do 
             let radius = 1
                 testMessage = "d.....o.....g"
                 expected = "dog"
             
             decode testMessage radius `shouldBe` expected
+
+        it "should add noise to text" $ do 
+            let n = 6
+                testMessage = "dog"
+                expectedCode = "d.....o.....g"
             
+            addNoise testMessage n `shouldBe` expectedCode               
+
+        it "should encode message for cipher size" $ do 
+            let radius = 1
+                testMessage = "dog"
+                expectedCode = "d.....o.....g"
+            
+            encode testMessage radius `shouldBe` expectedCode
+            
+        it "should generate a random string" $ do
+            let expectedLength = 4
+
+            actual <- getRandomString expectedLength
+            length actual `shouldBe` expectedLength
+
 
 
         

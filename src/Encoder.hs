@@ -1,15 +1,38 @@
 module Encoder where
 
 import Numeric.Tools.Integration
+import Test.RandomStrings
 
-encode :: Int -> Int
-encode x = x
+encode :: String -> Double -> String
+encode message radius = 
+    let distance = getHelicalLengthOfLetters radius
+
+    in addNoise message distance
 
 decode :: String -> Double -> String
 decode message radius = 
     let distance = getHelicalLengthOfLetters radius
 
     in dropEvery message distance
+
+addNoise :: String -> Int -> String
+addNoise xs n =
+    if length xs <= 1
+    then xs
+    else 
+        let 
+            length = n - 1
+            firstChar = take 1 xs
+            noise = replicate length '.'
+            firstCharEncoded = firstChar ++ noise
+            theRestOfTheMessage = addNoise (drop 1 xs) n
+
+        in firstCharEncoded ++ theRestOfTheMessage
+
+getRandomString :: Int -> IO String
+getRandomString length = do
+    r <- randomString (onlyAlpha randomChar8) length
+    return r
 
 dropEvery :: [a] -> Int -> [a]
 dropEvery xs n = [ i | (i,c) <- ( zip xs [0..]), (mod c n) == 0]

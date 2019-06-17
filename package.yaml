@@ -19,6 +19,7 @@ description:         Please see the README on GitHub at <https://github.com/NmVA
 dependencies:
 - base >= 4.7 && < 5
 - numeric-tools
+- random-strings
 
 library:
   source-dirs: src
@@ -36,7 +37,7 @@ executables:
 
 tests:
   scytale-test:
-    main:                EncoderSpec.hs
+    main:                Spec.hs
     source-dirs:         test
     ghc-options:
     - -threaded

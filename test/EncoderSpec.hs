@@ -19,7 +19,13 @@ main = hspec $ do
             let radius = 1
                 expectedArcLength = 7
 
-            getAproximateLengthOfFirstSpiral radius `shouldBe` expectedArcLength
+            getAproximateLengthOfFirstArchemdedianSpiral radius `shouldBe` expectedArcLength
 
+        it "should calculate the length of a helical curve" $ do 
+            let radius = 2.5
+                height = 10
+                expectedLength = 19
+            
+            getHelicalLength radius height `shouldBe` expectedLength
 
         

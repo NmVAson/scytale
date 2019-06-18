@@ -3,28 +3,20 @@ module Encoder where
 import Numeric.Tools.Integration
 import Test.RandomStrings
 
-encode :: String -> Double -> String
-encode message radius = 
+encode :: String -> Double -> IO String
+encode message radius = do
     let distance = getHelicalLengthOfLetters radius
+        messageAsStringList = map return message
+    
+    noise <- getRandomString (distance - 1)
 
-    in addNoise message distance
+    return $ concatMap (\x -> x ++ noise) messageAsStringList
 
 decode :: String -> Double -> String
 decode message radius = 
     let distance = getHelicalLengthOfLetters radius
 
     in dropEvery message distance
-
-addNoise :: String -> Int -> String
-addNoise xs n =
-    let 
-        length = n - 1
-        firstChar = take 1 xs
-        noise = replicate length '.'
-        firstCharEncoded = firstChar ++ noise
-        theRestOfTheMessage = addNoise (drop 1 xs) n
-
-    in firstCharEncoded ++ theRestOfTheMessage
 
 getRandomString :: Int -> IO String
 getRandomString = randomString (onlyAlpha randomChar8)

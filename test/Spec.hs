@@ -4,7 +4,7 @@ import Control.Exception (evaluate)
 import Encoder
 
 main :: IO ()
-main = hspec $ 
+main = hspec $
     describe "Encoder" $ do
         it "should calculate the circumference" $ do 
             let diameter = 2.1
@@ -25,7 +25,6 @@ main = hspec $
             
             getHelicalLength radius height `shouldBe` expectedLength
 
-
         it "should calculate the length of a helical curve of letters around a scytale" $ do 
             let radius = 1
                 expectedLength = 6
@@ -44,28 +43,15 @@ main = hspec $
                 testMessage = "d.....o.....g"
                 expected = "dog"
             
-            decode testMessage radius `shouldBe` expected
-
-        it "should add noise to text" $ do 
-            let n = 6
-                testMessage = "dog"
-                expectedCode = "d.....o.....g"
-            
-            addNoise testMessage n `shouldBe` expectedCode               
+            decode testMessage radius `shouldBe` expected             
 
         it "should encode message for cipher size" $ do 
             let radius = 1
                 testMessage = "dog"
-                expectedCode = "d.....o.....g"
             
-            encode testMessage radius `shouldBe` expectedCode
-            
-        it "should generate a random string" $ do
-            let expectedLength = 4
+            actual <- encode testMessage radius
 
-            actual <- getRandomString expectedLength
-            length actual `shouldBe` expectedLength
+            actual!!0 `shouldBe` 'd'
+            actual!!6 `shouldBe` 'o'
+            actual!!12 `shouldBe` 'g'
 
-
-
-        

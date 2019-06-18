@@ -25,16 +25,15 @@ getRandomString = randomString (onlyAlpha randomChar8)
 dropEvery :: [a] -> Int -> [a]
 dropEvery xs n = [ i | (i,c) <- ( zip xs [0..]), (mod c n) == 0]
 
+getHelicalLengthOfLetters :: Double -> Int
+getHelicalLengthOfLetters radius = 
+    let distanceBetweenFirstLetterAndNextMatchingLetter = 1
+    
+    in getHelicalLength radius distanceBetweenFirstLetterAndNextMatchingLetter
+
 getHelicalLength :: Double -> Double -> Int
 getHelicalLength radius height = 
     let circumference = 2 * pi * radius
         length = sqrt(height^2 + circumference^2)
     
     in round length
-
-
-getHelicalLengthOfLetters :: Double -> Int
-getHelicalLengthOfLetters radius = 
-    let distanceBetweenFirstLetterAndNextMatchingLetter = 1
-    
-    in getHelicalLength radius distanceBetweenFirstLetterAndNextMatchingLetter

@@ -27,9 +27,7 @@ addNoise xs n =
     in firstCharEncoded ++ theRestOfTheMessage
 
 getRandomString :: Int -> IO String
-getRandomString length = do
-    r <- randomString (onlyAlpha randomChar8) length
-    return r
+getRandomString = randomString (onlyAlpha randomChar8)
 
 dropEvery :: [a] -> Int -> [a]
 dropEvery xs n = [ i | (i,c) <- ( zip xs [0..]), (mod c n) == 0]

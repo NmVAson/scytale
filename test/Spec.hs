@@ -4,7 +4,7 @@ import Control.Exception (evaluate)
 import Encoder
 
 main :: IO ()
-main = hspec $ do
+main = hspec $ 
     describe "Encoder" $ do
         it "should calculate the circumference" $ do 
             let diameter = 2.1

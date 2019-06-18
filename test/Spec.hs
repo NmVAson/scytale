@@ -6,18 +6,6 @@ import Encoder
 main :: IO ()
 main = hspec $
     describe "Encoder" $ do
-        it "should calculate the circumference" $ do 
-            let diameter = 2.1
-                expectedCircumference = 6.5973445725385655
-
-            getCircumference diameter `shouldBe` expectedCircumference
-
-        it "should caluclate an approximation of the length of the first spiral" $ do
-            let radius = 1
-                expectedArcLength = 7
-
-            getAproximateLengthOfFirstArchemdedianSpiral radius `shouldBe` expectedArcLength
-
         it "should calculate the length of a helical curve" $ do 
             let radius = 2.5
                 height = 10
@@ -54,4 +42,3 @@ main = hspec $
             actual!!0 `shouldBe` 'd'
             actual!!6 `shouldBe` 'o'
             actual!!12 `shouldBe` 'g'
-

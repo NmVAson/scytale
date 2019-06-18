@@ -7,8 +7,9 @@ encode :: String -> Double -> IO String
 encode message radius = do
     let distance = getHelicalLengthOfLetters radius
         messageAsStringList = map return message
+        length = distance - 1
     
-    noise <- getRandomString (distance - 1)
+    noise <- getRandomString length
 
     return $ concatMap (\x -> x ++ noise) messageAsStringList
 
@@ -23,18 +24,6 @@ getRandomString = randomString (onlyAlpha randomChar8)
 
 dropEvery :: [a] -> Int -> [a]
 dropEvery xs n = [ i | (i,c) <- ( zip xs [0..]), (mod c n) == 0]
-
-getCircumference :: Double -> Double
-getCircumference diameter = pi * diameter
-
-getAproximateLengthOfFirstArchemdedianSpiral :: Double -> Int
-getAproximateLengthOfFirstArchemdedianSpiral radius =
-    let lowerLimit = 0
-        upperLimit = pi/4
-        l x = radius * sqrt((tan x)^2 + 1)
-        res = quadRomberg defQuad (lowerLimit, upperLimit) l
-        arcLength = 8 * quadBestEst res
-    in round arcLength
 
 getHelicalLength :: Double -> Double -> Int
 getHelicalLength radius height = 
